@@ -42,7 +42,7 @@ int shell_builts(char **args,char** env, char* initial_directory)
     {
         return command_which(args, env);
     }
-    else if(strcmp(args[0], "exit"))
+    else if(strcmp(args[0], "exit") || strcmp(args[0], "quit"))
     {
         exit(EXIT_SUCCESS);
     }
