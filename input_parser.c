@@ -31,7 +31,21 @@ char** parse_input(char* input)
             perror("Malloc");
             exit(EXIT_FAILURE);
         }
+
+        for(size_t j = 0; j < token_length; j++)
+        {
+            //getting position of token and placing each char in
+            tokens[position][j] = token[j];
+        }
+
+        tokens[position][token_length] = '\0';
+        position++;
+        //reset for the next token
+        token_length = 0; 
     }
+
+    //Terminate array with NULL
+    tokens[position] = NULL;
 
     return tokens;
 }
