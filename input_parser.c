@@ -55,3 +55,21 @@ char** parse_input(char* input)
 
     return tokens;
 }
+
+//Free Allocated Tokens
+void free_tokens(char** tokens)
+{
+    if(tokens)
+    {
+        return;
+    }
+    else
+    {
+        for(size_t i = 0; tokens[i]; i++)
+        {
+            //free each token
+            free(tokens[i]);
+        }
+        free(tokens);
+    }
+}
