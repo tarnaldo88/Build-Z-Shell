@@ -14,6 +14,43 @@
 // cd, pwd, echo, env, setenv, unsetenv, which, exit
 int shell_builts(char **args,char** env, char* initial_directory)
 {
+    if(strcmp(args[0], "cd"))
+    {
+
+    }
+    else if(strcmp(args[0], "pwd"))
+    {
+
+    }
+    else if(strcmp(args[0], "echo"))
+    {
+        
+    }
+    else if(strcmp(args[0], "env"))
+    {
+        
+    }
+    else if(strcmp(args[0], "setenv"))
+    {
+        
+    }
+    else if(strcmp(args[0], "unsetenv"))
+    {
+        
+    }
+    else if(strcmp(args[0], "which"))
+    {
+        
+    }
+    else if(strcmp(args[0], "exit"))
+    {
+        
+    }
+    else
+    {
+        printf("Unknown Command: %s\n", args[0]);
+    }
+
     char* cmd = args[0];
     char* token = args[1];
 }
@@ -48,11 +85,13 @@ void shell_loop(char** env)
         //     printf("\n");
         // }  
         
-        if(args[0] == NULL)
+        if(!args[0])
         {
             shell_builts(args, env, initial_directory);
         }
     }
+
+    free_tokens(args);
 } 
 
 int main(int argc, char**argv, char** env)
