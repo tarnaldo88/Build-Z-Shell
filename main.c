@@ -12,36 +12,36 @@
 //manage path
 //Error handling
 
-// cd, pwd, echo, env, setenv, unsetenv, which, exit
+// Built-in: cd, pwd, echo, env, setenv, unsetenv, which, exit
 int shell_builts(char **args, char** env, char* initial_directory)
 {
     if(my_strcmp(args[0], "cd") == 0)
     {
-        // return command_cd(args, initial_directory);
+        return command_cd(args, initial_directory);
     }
     else if(my_strcmp(args[0], "pwd") == 0)
     {
-        // return command_pwd();
+        return command_pwd();
     }
     else if(my_strcmp(args[0], "echo") == 0)
     {
-        // return command_echo(args, env);
+        return command_echo(args, env);
     }
     else if(my_strcmp(args[0], "env") == 0)
     {
-        // return command_env(env);
+        return command_env(env);
     }
     else if(my_strcmp(args[0], "setenv") == 0)
     {
-        // char** result = command_setenv(args, env);
+        char** result = command_setenv(args, env);
     }
     else if(my_strcmp(args[0], "unsetenv") == 0)
     {
-        // char** result = command_unsetenv(args, env);
+        char** result = command_unsetenv(args, env);
     }
     else if(my_strcmp(args[0], "which") == 0)
     {
-        // return command_which(args, env);
+        return command_which(args, env);
     }
     else if(my_strcmp(args[0], "exit") == 0 || my_strcmp(args[0], "quit") == 0)
     {
@@ -51,6 +51,7 @@ int shell_builts(char **args, char** env, char* initial_directory)
     else
     {
         printf("Unknown Command: %s\n", args[0]);
+        //executor();
     }
 
     return 0;
