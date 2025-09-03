@@ -3,7 +3,7 @@ OBJ = main.c input_parser.c
 CC = gcc
 
 all: 
-	$(CC) -o $(TARGET) %(OBJ)
+	$(CC) -o $(TARGET) $(OBJ)
 clean:
 	rm -f *-o
 fclean:
