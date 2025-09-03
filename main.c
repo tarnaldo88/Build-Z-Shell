@@ -1,5 +1,6 @@
 #include "torres_shell.h"
 
+
 //MAIN OBJ of project
 //Shell loop 
 // Input Parsing
@@ -10,12 +11,21 @@
 //manage path
 //Error handling
 
+// cd, pwd, echo, env, setenv, unsetenv, which, exit
+int shell_builts(char **args,char** env, char* initial_directory)
+{
+    char* cmd = args[0];
+    char* token = args[1];
+}
+
 void shell_loop(char** env)
 {
     char* input = NULL;
     size_t input_size = 0;
 
     char** args;
+
+    char* initial_directory = getcwd(NULL, 0);
 
     while(1)
     {
@@ -32,11 +42,16 @@ void shell_loop(char** env)
 
         args = parse_input(input);
 
-        for(size_t i = 0; args[i]; i++)
+        // for(size_t i = 0; args[i]; i++)
+        // {
+        //     printf("args: %s", args[i]);
+        //     printf("\n");
+        // }  
+        
+        if(args[0] == NULL)
         {
-            printf("args: %s", args[i]);
-            printf("\n");
-        }        
+            shell_builts(args, env, initial_directory);
+        }
     }
 } 
 
