@@ -5,7 +5,12 @@ int command_cd(char** args, char* initial_directory)
     // CD requires path 
     if(args[1] == NULL)
     {
-        perror("CD requires path\n");
+        perror("CD requires path- example: \"cd [directory]\"\n");
+        return -1;
+    } 
+    else if(chdir(args[1]) != 0)
+    {
+        perror("CD");
         return -1;
     }
 
