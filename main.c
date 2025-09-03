@@ -1,4 +1,5 @@
 #include "torres_shell.h"
+#include <stddef.h>
 
 
 //MAIN OBJ of project
@@ -14,35 +15,35 @@
 // cd, pwd, echo, env, setenv, unsetenv, which, exit
 int shell_builts(char **args,char** env, char* initial_directory)
 {
-    if(strcmp(args[0], "cd"))
+    if(my_strcmp(args[0], "cd"))
     {
         return command_cd(args, initial_directory);
     }
-    else if(strcmp(args[0], "pwd"))
+    else if(my_strcmp(args[0], "pwd"))
     {
         return command_pwd();
     }
-    else if(strcmp(args[0], "echo"))
+    else if(my_strcmp(args[0], "echo"))
     {
         return command_echo(args, env);
     }
-    else if(strcmp(args[0], "env"))
+    else if(my_strcmp(args[0], "env"))
     {
         return command_env(env);
     }
-    else if(strcmp(args[0], "setenv"))
+    else if(my_strcmp(args[0], "setenv"))
     {
         char** result = command_setenv(args, env);
     }
-    else if(strcmp(args[0], "unsetenv"))
+    else if(my_strcmp(args[0], "unsetenv"))
     {
         char** result = command_unsetenv(args, env);
     }
-    else if(strcmp(args[0], "which"))
+    else if(my_strcmp(args[0], "which"))
     {
         return command_which(args, env);
     }
-    else if(strcmp(args[0], "exit") || strcmp(args[0], "quit"))
+    else if(my_strcmp(args[0], "exit") || strcmp(args[0], "quit"))
     {
         exit(EXIT_SUCCESS);
     }
