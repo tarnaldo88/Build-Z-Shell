@@ -19,7 +19,7 @@ void shell_loop(char** env)
 
     while(1)
     {
-        printf("[torres_shell]>");
+        printf("[torres_shell]> ");
 
         //returns -1 when it is the end of file (EOF), ctrl + D
         if (getline(&input, &input_size, stdin) == -1)
@@ -32,9 +32,10 @@ void shell_loop(char** env)
 
         args = parse_input(input);
 
-        for(size_t i = 0;args[i]; i++)
+        for(size_t i = 0; args[i]; i++)
         {
             printf("args: %s", args[i]);
+            printf("\n");
         }        
     }
 } 
