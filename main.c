@@ -86,7 +86,7 @@ void shell_loop(char** env)
         //     printf("\n");
         // }  
         
-        if(!args[0])
+        if(args[0])
         {
             shell_builts(args, env, initial_directory);
         }
