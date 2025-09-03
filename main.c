@@ -19,9 +19,12 @@ void shell_loop(char** env)
 
     while(1)
     {
+        printf("[torres_shell]>");
+        
         //returns -1 when it is the end of file (EOF), ctrl + D
         if (getline(&input, &input_size, stdin) == -1)
         {
+            perror("getline");
             break;
         }
 
