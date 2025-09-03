@@ -28,6 +28,7 @@ int command_echo(char **args, char **env)
     {
         printf("%s ", args[i]);
     }
+    printf("\n");
     return 0;
 }
 
