@@ -13,38 +13,39 @@
 //Error handling
 
 // cd, pwd, echo, env, setenv, unsetenv, which, exit
-int shell_builts(char **args,char** env, char* initial_directory)
+int shell_builts(char **args, char** env, char* initial_directory)
 {
-    if(my_strcmp(args[0], "cd"))
+    if(my_strcmp(args[0], "cd") == 0)
     {
-        return command_cd(args, initial_directory);
+        // return command_cd(args, initial_directory);
     }
-    else if(my_strcmp(args[0], "pwd"))
+    else if(my_strcmp(args[0], "pwd") == 0)
     {
-        return command_pwd();
+        // return command_pwd();
     }
-    else if(my_strcmp(args[0], "echo"))
+    else if(my_strcmp(args[0], "echo") == 0)
     {
-        return command_echo(args, env);
+        // return command_echo(args, env);
     }
-    else if(my_strcmp(args[0], "env"))
+    else if(my_strcmp(args[0], "env") == 0)
     {
-        return command_env(env);
+        // return command_env(env);
     }
-    else if(my_strcmp(args[0], "setenv"))
+    else if(my_strcmp(args[0], "setenv") == 0)
     {
-        char** result = command_setenv(args, env);
+        // char** result = command_setenv(args, env);
     }
-    else if(my_strcmp(args[0], "unsetenv"))
+    else if(my_strcmp(args[0], "unsetenv") == 0)
     {
-        char** result = command_unsetenv(args, env);
+        // char** result = command_unsetenv(args, env);
     }
-    else if(my_strcmp(args[0], "which"))
+    else if(my_strcmp(args[0], "which") == 0)
     {
-        return command_which(args, env);
+        // return command_which(args, env);
     }
-    else if(my_strcmp(args[0], "exit") || strcmp(args[0], "quit"))
+    else if(my_strcmp(args[0], "exit") == 0 || my_strcmp(args[0], "quit") == 0)
     {
+        printf("Goodbye!\n");
         exit(EXIT_SUCCESS);
     }
     else
@@ -52,8 +53,7 @@ int shell_builts(char **args,char** env, char* initial_directory)
         printf("Unknown Command: %s\n", args[0]);
     }
 
-    char* cmd = args[0];
-    char* token = args[1];
+    return 0;
 }
 
 void shell_loop(char** env)
@@ -90,9 +90,23 @@ void shell_loop(char** env)
         {
             shell_builts(args, env, initial_directory);
         }
+
+        if (args)
+        {
+            free_tokens(args);
+            args = NULL;
+        }
     }
 
-    free_tokens(args);
+    if (input)
+    {
+        free(input);
+    }
+
+    if (initial_directory)
+    {
+        free(initial_directory);
+    }
 } 
 
 int main(int argc, char**argv, char** env)
