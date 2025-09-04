@@ -156,8 +156,8 @@ char* my_strtok(char* str, const char* delimiter)
         next_token = NULL;
     }
     
-    return token;
-    
+    free(next_token);
+    return token;    
 }
 
 char * my_strch(const char* str, char c)

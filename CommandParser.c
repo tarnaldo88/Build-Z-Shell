@@ -101,7 +101,8 @@ int command_env(char **env)
     {
         printf("%s", env[index]);
         index++;
-    }    
+    } 
+    printf("\n");
     return 0;
 }
 
@@ -151,8 +152,9 @@ char* find_command_in_path(char** env)
 
     printf("tokPath: %s\n", token);
 
+    free(path);
     
-    return path;    
+    return NULL;    
 }
 
 int command_which(char **args, char **env)
@@ -175,8 +177,7 @@ int command_which(char **args, char **env)
 
     //check external commands
     printf("Finding Path: \n");
-    find_command_in_path(env);
-    
+    find_command_in_path(env);    
 
     return 1;
 }
