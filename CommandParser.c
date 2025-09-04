@@ -130,6 +130,8 @@ char* find_command_in_path(char* command, char** env)
     path = my_strdup(path_env);
 
     printf("Path: %s\n", path);
+
+    free(path);
     return path;    
 }
 
@@ -141,7 +143,7 @@ int command_which(char **args, char **env)
     }
 
     //List of built in commands
-    const char* built_in_commands[] = {"cd", "pwd", "echo", "env", "setenv", "unsetenv", "which", "exit"};
+    const char* built_in_commands[] = {"cd", "pwd", "echo", "env", "setenv", "unsetenv", "which", "exit", NULL};
     for (size_t i = 0; built_in_commands[i]; i++)
     {
         if(my_strcmp(args[1], built_in_commands[i]) == 0)

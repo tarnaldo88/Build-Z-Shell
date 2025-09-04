@@ -81,13 +81,13 @@ char * my_getenv(const char* name, char** env)
 
 char* my_strdup(const char* str)
 {
-    if(str) return NULL;
+    if(str == NULL) return NULL;
 
     size_t len = my_strlen(str);
 
     char* duplicate = (char*)malloc((len+1) * sizeof(char));
 
-    if(duplicate) return NULL;
+    if(duplicate == NULL) return NULL;
 
     my_strcopy(duplicate, str);
 
