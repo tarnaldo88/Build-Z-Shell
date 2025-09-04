@@ -1,5 +1,17 @@
 #include "torres_shell.h"
 
+size_t my_strlen(const char* str)
+{
+    size_t len = 0;
+
+    while(*str)
+    {
+        len++;
+        str++;
+    }
+    return len;
+}
+
 /*
     my_strcmp("cat", "cat");   // returns 0
     my_strcmp("bat", "cat");   // negative (<0), because 'b' < 'c'
@@ -17,18 +29,11 @@ int my_strcmp(const char* str1, const char* str2)
     return *(unsigned char*)str1 - *(unsigned char*)str2;
 }
 
-size_t my_strlen(const char* str)
-{
-    size_t len = 0;
-
-    while(*str)
-    {
-        len++;
-        str++;
-    }
-    return len;
-}
-
+/* 
+    Compares at most n characters.
+    Stops early if a mismatch is found or either string ends.
+    If the first n characters are the same, it returns 0, even if the strings differ later.
+*/
 //0: if strings are equal to n char. less than 0 str1 is less than str2. greater than 0 for opposite
 int my_strncmp(const char* str1, const char* str2, size_t n)
 {
@@ -38,7 +43,7 @@ int my_strncmp(const char* str1, const char* str2, size_t n)
     {
         if(str1[i] != str2[i])
         {
-            return *(unsigned char*)str1[i] - *(unsigned char*)str2[i];
+            return (unsigned char)str1[i] - (unsigned char)str2[i];
         }
         i++;
     }
@@ -49,7 +54,7 @@ int my_strncmp(const char* str1, const char* str2, size_t n)
     } 
     else
     {
-        return *(unsigned char*)str1[i] - *(unsigned char*)str2[i];
+        return (unsigned char)str1[i] - (unsigned char)str2[i];
     }
     
 }
@@ -66,9 +71,10 @@ char * my_getenv(const char* name, char** env)
     for(size_t i = 0; env[i];i++)
     {
         //check if env[i] starts with PATH=
-        if(my_strcmp(env[i]) == 0)
+        if(my_strncmp(env[i], name, name_len) == 0 && env[i][name_len] == '=')
         {
-
+            return &env[i][name_len + 1];
         }
     }
+    return NULL;
 }
