@@ -107,6 +107,23 @@ int command_env(char **env)
 
 int command_which(char **args, char **env)
 {
+    if(args[1] == NULL){
+        perror("An argument was not passed.\n");
+        return -1;
+    }
+
+    //List of built in commands
+    const char* built_in_commands[] = {"cd", "pwd", "echo", "env", "setenv", "unsetenv", "which", "exit"};
+    for (size_t i = 0; built_in_commands[i]; i++)
+    {
+        if(my_strcmp(args[1], built_in_commands[i]) == 0)
+        {
+            printf("%s: shell built-in command\n", args[1]);
+            return 0;
+        }
+    }
+    
+
     return 0;
 }
 
