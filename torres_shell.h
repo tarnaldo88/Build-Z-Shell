@@ -22,6 +22,8 @@ char** command_unsetenv(char** args, char** env);
 
 //helper function
 int my_strcmp(const char* str1, const char* str2);
+size_t my_strlen(const char* str);
+int my_strncmp(const char* str1, const char* str2, size_t n);
 char * my_getenv(const char* name, char** env);
 char* my_strdup(const char* str);
 char* my_strcopy(char * destination, const char * source);
