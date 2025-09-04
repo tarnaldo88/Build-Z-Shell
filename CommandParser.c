@@ -45,18 +45,48 @@ int command_pwd()
     return 0;
 }
 
+//Examples: echo $PATH, echo -n Hello, echo message
 int command_echo(char **args, char **env)
 {
+    //default echo ends with newline
+    int new_line = 1;
+
+    //skipping -n
+    size_t i = 1;
+
+    if(args[i] != NULL && my_strcmp(args[1], "-n") == 0)
+    {
+        new_line = 0;
+        i++;
+        // printf("\n")
+    }
+
+    //Process remaining
     if(args[1] == NULL)
     {
         perror("Echo requires message to echo.\n");
         return -1;
     }
-    for(size_t i = 1; args[i]; i++)
+    for(; args[i]; i++)
     {
-        printf("%s ", args[i]);
+        if(args[i][0] == '$')
+        {
+            //handle env variables
+
+        }
+        else
+        {
+            printf("%s ", args[i]);
+        }
+        
+        //if the line: printf("%s ", args[i]); didnt have the space ' ' in the print statement
+        // if(args[i + 1] != NULL)
+        // {
+        //     printf(" ");
+        // }
     }
-    printf("\n");
+
+    if(new_line) printf("\n");
     return 0;
 }
 
