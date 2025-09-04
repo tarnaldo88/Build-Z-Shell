@@ -140,8 +140,28 @@ char ** command_unsetenv(char ** args, char ** env)
 return NULL;
 }
 
-
+//Search for the command in PATH
 char* find_command_in_path(char* command, char** env)
 {
+    //store the PATH value
+    char * path_env = NULL;
+    //duplicate of PATH    
+    char* path = NULL;
+    //tokenize dirs from the PATH
+    char* token = NULL;
+    //Buffer to construct full paths
+    char full_path[1024];
+
+    //locate the PATH
+    path_env = my_getenv(command, env);    
+
+    if (!path_env)
+    {
+        //no usable path was found
+        return NULL;
+    }
+
+    //duplicate path
+    path = my_strdup(path_env);
     
 }
