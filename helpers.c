@@ -160,7 +160,7 @@ char* my_strtok(char* str, const char* delimiter)
     
 }
 
-char * my_strch(const char* str, char* c)
+char * my_strch(const char* str, char c)
 {
     while (*str)        
     {

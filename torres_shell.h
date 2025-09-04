@@ -28,4 +28,4 @@ char * my_getenv(const char* name, char** env);
 char* my_strdup(const char* str);
 char* my_strcopy(char * destination, const char * source);
 char* my_strtok(char* str, const char* delimiter);
-char * my_strch(const char* str, char* c);
+char * my_strch(const char* str, char c);
