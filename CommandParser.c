@@ -149,6 +149,8 @@ char* find_command_in_path(char** env)
     //Split PATH into individual directories using char ':'
     token = strtok(path, ":");
 
+    printf("tokPath: %s\n", token);
+
     
     return path;    
 }
