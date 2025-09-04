@@ -106,7 +106,7 @@ int command_env(char **env)
 }
 
 //Search for the command in PATH
-char* find_command_in_path(char* command, char** env)
+char* find_command_in_path(char** env)
 {
     //store the PATH value
     char* path_env = NULL;
@@ -118,7 +118,7 @@ char* find_command_in_path(char* command, char** env)
     char full_path[1024];
 
     //locate the PATH
-    path_env = my_getenv(command, env);    
+    path_env = my_getenv("PATH=", env);    
 
     if (!path_env)
     {
@@ -130,8 +130,7 @@ char* find_command_in_path(char* command, char** env)
     path = my_strdup(path_env);
 
     printf("Path: %s\n", path);
-
-    free(path);
+    
     return path;    
 }
 
@@ -154,7 +153,8 @@ int command_which(char **args, char **env)
     }
 
     //check external commands
-    char* full_path = find_command_in_path(args[1], env);
+    printf("Finding Path: \n");
+    find_command_in_path(env);
     
 
     return 1;

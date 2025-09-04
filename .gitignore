@@ -54,3 +54,4 @@ dkms.conf
 # debug information files
 *.dwo
 torres_shell
+.vscode/settings.json
