@@ -67,7 +67,15 @@ int command_echo(char **args, char **env)
         if(args[i][0] == '$')
         {
             //handle env variables
-
+            char* val = getenv(args[i] + 1);
+            if(val)
+            {
+                printf("%s", val);
+            }
+            else
+            {
+                printf("");
+            }
         }
         else
         {

@@ -22,3 +22,4 @@ char** command_unsetenv(char** args, char** env);
 
 //helper function
 int my_strcmp(const char* str1, const char* str2);
+char * my_getenv(const char* name, char** env);
