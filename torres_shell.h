@@ -27,3 +27,4 @@ int my_strncmp(const char* str1, const char* str2, size_t n);
 char * my_getenv(const char* name, char** env);
 char* my_strdup(const char* str);
 char* my_strcopy(char * destination, const char * source);
+char* my_strtok(char* str, char* delimiter);

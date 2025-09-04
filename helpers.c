@@ -41,7 +41,7 @@ int my_strcmp(const char* str1, const char* str2)
 int my_strncmp(const char* str1, const char* str2, size_t n)
 {
     if(str1 == NULL || str2 == NULL) { return 1; }
-    
+
     size_t i =0;
 
     while (i < n && str1[i] && str2[i])
@@ -112,4 +112,9 @@ char* my_strcopy(char * destination, const char * source)
 
     *destination = '\0';
     return ret;
+}
+
+char* my_strtok(char* str, char* delimiter)
+{
+    
 }

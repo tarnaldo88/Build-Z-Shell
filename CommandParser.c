@@ -118,9 +118,18 @@ char* find_command_in_path(char** env)
     char full_path[1024];
 
     //locate the PATH
-    path_env = my_getenv("PATH", env);    
+    for (size_t i = 0; env[i]; i++)
+    {
+        if (my_strncmp(env[i], "PATH=", 5) == 0)
+        {
+            //5 is to skip path= characters
+            path_env = env[i] + 5;
+            break;
+        }
+        
+    }
 
-    if (!path_env)
+    if (path_env == NULL)
     {
         //no usable path was found
         return NULL;
@@ -129,7 +138,17 @@ char* find_command_in_path(char** env)
     //duplicate path
     path = my_strdup(path_env);
 
-    printf("Path: %s\n", path);
+    // printf("Path: %s\n", path);
+
+    if(path == NULL)
+    {
+        perror("my_strdup failed.\n");
+        return NULL;
+    }
+
+    //Split PATH into individual directories using char ':'
+    token = strtok(path, ":");
+
     
     return path;    
 }
