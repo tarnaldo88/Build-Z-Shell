@@ -122,9 +122,12 @@ int command_which(char **args, char **env)
             return 0;
         }
     }
+
+    //check external commands
+    char* full_path = find_command_in_path(args[1], env);
     
 
-    return 0;
+    return 1;
 }
 
 char **command_setenv(char **args, char **env)
@@ -135,4 +138,10 @@ char **command_setenv(char **args, char **env)
 char ** command_unsetenv(char ** args, char ** env)
 {
 return NULL;
+}
+
+
+char* find_command_in_path(char* command, char** env)
+{
+    
 }
