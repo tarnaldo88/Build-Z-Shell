@@ -138,6 +138,26 @@ char* my_strtok(char* str, const char* delimiter)
         next_token = NULL;
         return NULL;
     }
+
+    char* token = str;
+
+    while (*str && !my_strch(delimiter, *str))
+    {
+        str++;
+    }
+
+    if (*str)   
+    {
+        *str = '\0';
+        next_token = str + 1;
+    } 
+    else
+    {
+        next_token = NULL;
+    }
+    
+    return token;
+    
 }
 
 char * my_strch(const char* str, char* c)
