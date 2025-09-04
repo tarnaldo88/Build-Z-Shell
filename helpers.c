@@ -114,7 +114,41 @@ char* my_strcopy(char * destination, const char * source)
     return ret;
 }
 
-char* my_strtok(char* str, char* delimiter)
+char* my_strtok(char* str, const char* delimiter)
 {
+    static char* next_token = NULL;
+
+    //if input str is null  
+    if(str == NULL)
+    {
+        str = next_token;
+    }
+    if(str == NULL)
+    {
+        return NULL;
+    }
+
+    while (*str && my_strch(delimiter, *str))
+    {
+        str++;
+    }
     
+    if(*str == '\0')
+    {
+        next_token = NULL;
+        return NULL;
+    }
+}
+
+char * my_strch(const char* str, char* c)
+{
+    while (*str)        
+    {
+        if(*str == c)
+        {
+            return (char*)str;
+        }
+        str++;
+    }
+    return NULL;
 }
