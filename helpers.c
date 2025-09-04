@@ -20,6 +20,8 @@ size_t my_strlen(const char* str)
 // returns 0 if strings are equal. < 0 str1 < str2 , > 0 str1 > str2
 int my_strcmp(const char* str1, const char* str2)
 {
+    if(str1 == NULL || str2 == NULL) { return NULL; }
+    
     while(*str1 && *str1 == *str2)
     {
         str1++;
