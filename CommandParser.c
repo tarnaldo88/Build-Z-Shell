@@ -107,7 +107,7 @@ int command_env(char **env)
 }
 
 //Search for the command in PATH
-char* find_command_in_path(char** env)
+char* find_command_in_path(char* command, char** env)
 {
     //store the PATH value
     char* path_env = NULL;
@@ -150,8 +150,24 @@ char* find_command_in_path(char** env)
     //Split PATH into individual directories using char ':'
     token = strtok(path, ":");
 
-    printf("tokPath: %s\n", token);
+    while (token != NULL)
+    {
+        //construct full path
+        snprintf(full_path, sizeof(full_path),"%s%s", token, command);
 
+        //If the command exists as executable
+        if (access(full_path, X_OK) == 0)
+        {
+            free(path);
+
+            //return the found commands path
+            return my_strdup(full_path); 
+        }
+        
+        //move to the next dir
+        token = my_strtok(NULL,":");
+    }
+    
     free(path);
     
     return NULL;    
@@ -177,7 +193,7 @@ int command_which(char **args, char **env)
 
     //check external commands
     printf("Finding Path: \n");
-    find_command_in_path(env);    
+    find_command_in_path(args[1], env);    
 
     return 1;
 }
