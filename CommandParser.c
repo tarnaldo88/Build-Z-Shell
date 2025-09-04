@@ -95,6 +95,13 @@ int command_echo(char **args, char **env)
 
 int command_env(char **env)
 {
+    size_t index = 0;
+
+    while (env[index] != NULL)
+    {
+        printf("%s", env[index]);
+        index++;
+    }    
     return 0;
 }
 
