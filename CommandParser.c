@@ -62,11 +62,6 @@ int command_echo(char **args, char **env)
     }
 
     //Process remaining
-    if(args[1] == NULL)
-    {
-        perror("Echo requires message to echo.\n");
-        return -1;
-    }
     for(; args[i]; i++)
     {
         if(args[i][0] == '$')
