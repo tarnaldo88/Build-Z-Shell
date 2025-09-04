@@ -96,5 +96,15 @@ char* my_strdup(const char* str)
 
 char* my_strcopy(char * destination, const char * source)
 {
-    
+    char * ret = destination;
+
+    while(*source)
+    {
+        *destination = *source;
+        destination++;
+        source++;
+    }
+
+    *destination = '\0';
+    return ret;
 }
