@@ -118,7 +118,7 @@ char* find_command_in_path(char** env)
     char full_path[1024];
 
     //locate the PATH
-    path_env = my_getenv("PATH=", env);    
+    path_env = my_getenv("PATH", env);    
 
     if (!path_env)
     {
