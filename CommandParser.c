@@ -243,7 +243,6 @@ char **command_setenv(char **args, char **env)
 
     if (!new_env)
     {
-        printf("newenv malloc 242 failed\n");
         perror("malloc");
         return env;
     }
@@ -300,8 +299,9 @@ char **command_setenv(char **args, char **env)
     // printf("%s\n", new_var);
 
     // printf("%s\n", new_env[0]);
-    new_env[env_count] = new_var;
-    new_env[env_count + 1] = NULL;
+    new_env[env_count] = "\n";
+    new_env[env_count + 1] = new_var;
+    new_env[env_count + 2] = NULL;
 
     // free old env
     // for (size_t i = 0; env[i]; i++)
