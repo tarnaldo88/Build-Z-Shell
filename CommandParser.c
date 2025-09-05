@@ -162,9 +162,9 @@ char* find_command_in_path(const char* command, char** env)
             printf("inside ELSE backslash\n");
             snprintf(full_path, sizeof(full_path),"%s%s", token, command);
         }
-
+        
         //If the command exists as executable
-        if (access(full_path, X_OK) == 0)
+        if (access(full_path, X_OK) != 0)
         {
             free(path);
             printf("inside access() if\n");
@@ -176,8 +176,7 @@ char* find_command_in_path(const char* command, char** env)
         token = my_strtok(NULL,":");
     }
     
-    free(path);  
-    printf("inside line 181\n");      
+    free(path);      
     return NULL;    
 }
 
