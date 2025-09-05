@@ -31,14 +31,14 @@ int shell_builts(char **args, char** env, char* initial_directory)
     {
         return command_env(env);
     }
-    else if(my_strcmp(args[0], "setenv") == 0)
-    {
-        char** result = command_setenv(args, env);
-    }
-    else if(my_strcmp(args[0], "unsetenv") == 0)
-    {
-        char** result = command_unsetenv(args, env);
-    }
+    // else if(my_strcmp(args[0], "setenv") == 0)
+    // {
+    //     env = command_setenv(args, env);
+    // }
+    // else if(my_strcmp(args[0], "unsetenv") == 0)
+    // {
+    //     char** result = command_unsetenv(args, env);
+    // }
     else if(my_strcmp(args[0], "which") == 0)
     {
         return command_which(args, env);
@@ -87,6 +87,20 @@ void shell_loop(char** env)
         //     printf("\n");
         // }  
         
+        if (!args[0])
+        {
+            return;            
+        }
+        else if (my_strcmp(args[0], "setenv") == 0)
+        {
+            env = command_setenv(args, env);
+        }
+        else if (my_strcmp(args[0], "unsetenv") == 0)
+        {
+            env = command_unsetenv(args, env);
+        }
+        
+
         if(args[0])
         {
             shell_builts(args, env, initial_directory);
