@@ -268,9 +268,9 @@ char **command_setenv(char **args, char **env)
     //Determine format of input & create the new variable
     char* new_var = NULL;
 
-    if (args[2] != NULL)
+    if (args[2] == NULL)
     {
-        new_var = my_strdup(args[2]);
+        new_var = my_strdup(args[1]);
     }
     else
     {
@@ -283,8 +283,29 @@ char **command_setenv(char **args, char **env)
         
     }
     
+    if (new_var)    
+    {
+        perror("malloc");;
 
-    return NULL;
+        for (int i = 0; i < env_count; i++)
+        {
+            free(new_env[i]);
+        }
+        free(new_env);
+        return env;
+    }
+
+    new_env[env_count] = new_var;
+    new_env[env_count + 1] = NULL;
+
+    // free old env
+    for (size_t i = 0; env[i]; i++)
+    {
+        free(env[i]);
+    }
+    free(env);   
+
+    return new_env;
 }
 
 //
