@@ -241,7 +241,7 @@ char **command_setenv(char **args, char **env)
     //adding 2 extra space for variable and value
     char** new_env = malloc((env_count + 2) * sizeof(char*));
 
-    if (new_env)
+    if (!new_env)
     {
         perror("malloc");
         return env;
