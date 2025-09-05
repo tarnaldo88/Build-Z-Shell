@@ -99,9 +99,7 @@ void shell_loop(char** env)
         {
             env = command_unsetenv(args, env);
         }
-        
-
-        if(args[0])
+        else if(args[0])
         {
             shell_builts(args, env, initial_directory);
         }

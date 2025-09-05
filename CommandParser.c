@@ -220,7 +220,7 @@ char **command_setenv(char **args, char **env)
 {
     if(args[1] == NULL)
     {
-        printf("Usage:  setenv VAR=value\n\t setenv <variable> <value> \n");
+        printf("Usage:  setenv VAR=value\n\tsetenv <variable> <value> \n");
         return NULL;
     }
 
