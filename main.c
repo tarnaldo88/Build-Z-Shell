@@ -93,7 +93,7 @@ void shell_loop(char** env)
         }
         else if (my_strcmp(args[0], "setenv") == 0)
         {
-            command_setenv(args, env);
+            env = command_setenv(args, env);
         }
         else if (my_strcmp(args[0], "unsetenv") == 0)
         {
