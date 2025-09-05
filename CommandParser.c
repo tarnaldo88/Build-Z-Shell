@@ -215,6 +215,18 @@ int command_which(char **args, char **env)
     }
 }
 
+//Helper Function to count env vars
+int count_env_vars(char **env)
+{
+    int count = 0;
+
+    while (env[count])
+    {
+        count++;
+    }
+    return count;
+}
+
 //Sets an evnironment variable
 char **command_setenv(char **args, char **env)
 {
@@ -224,6 +236,53 @@ char **command_setenv(char **args, char **env)
         return NULL;
     }
 
+    int env_count = count_env_vars(env);
+
+    //adding 2 extra space for variable and value
+    char** new_env = malloc((env_count + 2) * sizeof(char*));
+
+    if (new_env)
+    {
+        perror("malloc");
+        return env;
+    }
+    
+    //copy existing env variables
+    for (size_t i = 0; i < env_count; i++)
+    {
+        new_env[i] = my_strdup(env[i]);
+
+        if (!new_env[i])
+        {
+            perror("strdup");
+
+            for (size_t j = i; j < i; j++)
+            {
+                free(new_env[i]);
+            }
+            free(new_env);
+            return env;
+        }        
+    }
+    
+    //Determine format of input & create the new variable
+    char* new_var = NULL;
+
+    if (args[2] != NULL)
+    {
+        new_var = my_strdup(args[2]);
+    }
+    else
+    {
+        new_var = malloc(my_strlen(args[1]) + my_strlen(args[2]) + 2);
+
+        if (new_var)
+        {
+            sprintf(new_var, "%s=%s", args[1], args[2]);
+        }
+        
+    }
+    
 
     return NULL;
 }
