@@ -101,6 +101,8 @@ char* my_strdup(const char* str)
 
 char* my_strcopy(char * destination, const char * source)
 {
+    if(source == NULL) return NULL;
+    
     char * ret = destination;
 
     while(*source)
@@ -156,7 +158,7 @@ char* my_strtok(char* str, const char* delimiter)
         next_token = NULL;
     }
     
-    free(next_token);
+    // free(next_token);
     return token;    
 }
 

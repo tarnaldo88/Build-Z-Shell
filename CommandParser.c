@@ -107,7 +107,7 @@ int command_env(char **env)
 }
 
 //Search for the command in PATH
-char* find_command_in_path(char* command, char** env)
+char* find_command_in_path(const char* command, char** env)
 {
     //store the PATH value
     char* path_env = NULL;
@@ -152,8 +152,17 @@ char* find_command_in_path(char* command, char** env)
 
     while (token != NULL)
     {
-        //construct full path
-        snprintf(full_path, sizeof(full_path),"%s%s", token, command);
+        //construct full path and check for '/'
+        size_t len = my_strlen(token);
+
+        if (token[len - 1] != '/') 
+        {
+            snprintf(full_path, sizeof(full_path),"%s%s%s", token, "/", command);
+        }
+        else
+        {
+            snprintf(full_path, sizeof(full_path),"%s%s", token, command);
+        }
 
         //If the command exists as executable
         if (access(full_path, X_OK) == 0)
@@ -192,10 +201,20 @@ int command_which(char **args, char **env)
     }
 
     //check external commands
-    printf("Finding Path: \n");
-    find_command_in_path(args[1], env);    
+    // printf("Finding Path: \n");
+    char* full_path = find_command_in_path(args[1], env); 
 
-    return 1;
+    if(full_path != NULL)
+    {
+        printf("%s\n", full_path);   
+        free(full_path) ;
+        return 0;
+    }
+    else
+    {
+        printf("%s :Unknown Command\n", args[1]);
+        return 1;
+    }
 }
 
 char **command_setenv(char **args, char **env)
