@@ -313,9 +313,48 @@ char **command_setenv(char **args, char **env)
     return new_env;
 }
 
-//
+//Unset environment variables
 char **command_unsetenv(char ** args, char ** env)
 {
-return NULL;
+    if(args[1] == NULL)
+    {
+        printf("Usage:  unsetenv <variable>\n");
+        return env;
+    }
+
+    int env_count = count_env_vars(env);
+    char** new_env = malloc(env_count*sizeof(char*));
+
+    if(new_env == NULL)
+    {
+        perror("malloc");
+        return env;
+    }
+
+    int j = 0, found = 0;
+
+    for (int i = 0; i < env_count; i++)
+    {
+        if(my_strncmp(env[i], args[i], my_strlen(args[1])) == 0 && env[i][my_strlen(args[1])] == '=')
+        {
+            found = 1;
+
+            //free the matching var user wanted unset
+            free(env[i]);
+        }
+        else
+        {
+            new_env[j++] = env[i];
+        }
+    }
+
+    if (!found)
+    {
+        printf("Variable %s not found \n", args[1]);
+    }
+    
+    
+
+    return NULL;
 }
 
