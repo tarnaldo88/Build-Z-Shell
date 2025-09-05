@@ -139,8 +139,6 @@ char* find_command_in_path(const char* command, char** env)
     //duplicate path
     path = my_strdup(path_env);
 
-    // printf("Path: %s\n", path);
-
     if(path == NULL)
     {
         perror("my_strdup failed.\n");
@@ -156,11 +154,12 @@ char* find_command_in_path(const char* command, char** env)
         size_t len = my_strlen(token);
 
         if (token[len - 1] != '/') 
-        {
+        {            
             snprintf(full_path, sizeof(full_path),"%s%s%s", token, "/", command);
         }
         else
         {
+            printf("inside ELSE backslash\n");
             snprintf(full_path, sizeof(full_path),"%s%s", token, command);
         }
 
@@ -168,7 +167,7 @@ char* find_command_in_path(const char* command, char** env)
         if (access(full_path, X_OK) == 0)
         {
             free(path);
-
+            printf("inside access() if\n");
             //return the found commands path
             return my_strdup(full_path); 
         }
@@ -177,8 +176,8 @@ char* find_command_in_path(const char* command, char** env)
         token = my_strtok(NULL,":");
     }
     
-    free(path);
-    
+    free(path);  
+    printf("inside line 181\n");      
     return NULL;    
 }
 

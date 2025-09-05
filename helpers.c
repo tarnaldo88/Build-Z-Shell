@@ -86,34 +86,30 @@ char * my_getenv(const char* name, char** env)
 
 char* my_strdup(const char* str)
 {
-    if(str == NULL) return NULL;
+    if (str == NULL) return NULL;
 
     size_t len = my_strlen(str);
 
-    char* duplicate = (char*)malloc((len+1) * sizeof(char));
+    char* duplicated = (char*)malloc((len+1) * sizeof(char));
 
-    if(duplicate == NULL) return NULL;
+    if (duplicated == NULL) return NULL;
 
-    my_strcopy(duplicate, str);
+    my_strcopy(duplicated, str);
 
-    return duplicate;
+    return duplicated;
 }
 
-char* my_strcopy(char * destination, const char * source)
+char* my_strcopy(char * dest, const char * src)
 {
-    if(source == NULL) return NULL;
-    
-    char * ret = destination;
-
-    while(*source)
-    {
-        *destination = *source;
-        destination++;
-        source++;
+    if (src == NULL) return NULL;
+    char* ret = dest;
+    while (*src) {
+        *dest = *src;
+        dest++;
+        src++;
     }
-
-    *destination = '\0';
-    return ret;
+    *dest = '\0';
+    return ret;   
 }
 
 char* my_strtok(char* str, const char* delimiter)
