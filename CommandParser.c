@@ -215,12 +215,21 @@ int command_which(char **args, char **env)
     }
 }
 
+//Sets an evnironment variable
 char **command_setenv(char **args, char **env)
 {
+    if(args[1] == NULL)
+    {
+        printf("Usage:  setenv VAR=value\n\t setenv <variable> <value> \n");
+        return NULL;
+    }
+
+
     return NULL;
 }
 
-char ** command_unsetenv(char ** args, char ** env)
+//
+char **command_unsetenv(char ** args, char ** env)
 {
 return NULL;
 }
