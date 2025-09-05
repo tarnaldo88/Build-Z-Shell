@@ -164,7 +164,7 @@ char* find_command_in_path(const char* command, char** env)
         }
 
         //If the command exists as executable
-        if (access(full_path, X_OK) != 0)
+        if (access(full_path, X_OK) != 0 || access(full_path, X_OK) == 0)
         {
             free(path);
             // printf("inside access() if\n");
