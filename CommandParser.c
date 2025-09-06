@@ -351,10 +351,11 @@ char **command_unsetenv(char ** args, char ** env)
     if (!found)
     {
         printf("Variable %s not found \n", args[1]);
+        return env;
     }
     
-    
+    new_env[j] = NULL;
 
-    return NULL;
+    return new_env;
 }
 
