@@ -335,7 +335,7 @@ char **command_unsetenv(char ** args, char ** env)
 
     for (int i = 0; i < env_count; i++)
     {
-        if(my_strncmp(env[i], args[i], my_strlen(args[1])) == 0 && env[i][my_strlen(args[1])] == '=')
+        if(my_strncmp(env[i], args[1], my_strlen(args[1])) == 0 && env[i][my_strlen(args[1])] == '=')
         {
             found = 1;
 
