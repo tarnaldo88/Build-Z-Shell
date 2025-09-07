@@ -112,4 +112,5 @@ int main(int argc, char**argv, char** env)
     (void)argv;
 
     shell_loop(env); 
+    return 0;
 }
