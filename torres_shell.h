@@ -6,6 +6,7 @@
 #include<sys/wait.h>
 
 #define MAX_INPUT 1024
+#define MAX_PATH 256
 
 char** parse_input(char* input);
 void free_tokens(char** tokens);
@@ -35,3 +36,4 @@ char* my_strdup(const char* str);
 char* my_strcopy(char * destination, const char * source);
 char* my_strtok(char* str, const char* delimiter);
 char* my_strch(const char* str, char c);
+char* my_strncopy(char* dest, const char* src, size_t n);
