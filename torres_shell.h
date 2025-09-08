@@ -19,6 +19,9 @@ int command_which(char** args, char** env);
 char** command_setenv(char** args, char** env);
 char** command_unsetenv(char** args, char** env);
 
+//Executor
+int executor(char** args, char** env);
+
 
 //helper function
 int my_strcmp(const char* str1, const char* str2);
