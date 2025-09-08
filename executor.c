@@ -15,7 +15,25 @@ int executor(char** args, char** env)
 
     if (pid == 0)
     {
-        return child_process(args,env);
+        if(child_process(args,env))
+        {
+            perror("execve");
+            return EXIT_FAILURE;
+        }
+    }
+    else
+    {
+        if (waitpid(pid, &status, 0) == -1)
+        {
+            perror("waitpid");
+            return EXIT_FAILURE;
+        }
+        
+        if (WIFSIGNALED(status))
+        {
+            printf("Process terminated by signal: %d\n", WTERMSIG(status));
+        }
+        
     }
     
 }
@@ -23,5 +41,5 @@ int executor(char** args, char** env)
 //Attempts to execute command by searching paths and the current directory
 int child_process(char** args, char** env)
 {
-
+    return EXIT_FAILURE;
 }
