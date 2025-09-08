@@ -43,7 +43,8 @@ int shell_builts(char **args, char** env, char* initial_directory)
     else
     {
         printf("Unknown Command: %s\n", args[0]);
-        //executor();
+        //execute an external command
+        return executor(args,env);
     }
 
     return 0;
