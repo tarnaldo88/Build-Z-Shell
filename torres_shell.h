@@ -21,6 +21,7 @@ char** command_unsetenv(char** args, char** env);
 
 //Executor
 int executor(char** args, char** env);
+int child_process(char** args, char** env);
 
 
 //helper function

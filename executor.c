@@ -12,4 +12,16 @@ int executor(char** args, char** env)
         perror("fork");
         return EXIT_FAILURE;
     }
+
+    if (pid == 0)
+    {
+        return child_process(args,env);
+    }
+    
+}
+
+//Attempts to execute command by searching paths and the current directory
+int child_process(char** args, char** env)
+{
+
 }
