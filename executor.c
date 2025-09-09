@@ -62,9 +62,10 @@ int child_process(char** args, char** env)
         if (access(full_path, X_OK) == 0)
         {
             execve(full_path, args, env);
-        }
-        
+        }        
     }
+
+    
     
 
 
@@ -115,7 +116,7 @@ char** split_paths(char * paths, int* count)
             perror("realloc");
             return NULL;
         }
-        
+
         result[*count] = my_strdup(token);
         
         if (!result[*count])
