@@ -54,27 +54,42 @@ void shell_loop(char** env)
 {
     char* input = NULL;
     size_t input_size = 0;
-
     char** args;
-
     char* initial_directory = getcwd(NULL, 0);
 
     while(1)
     {
         printf("[torres_shell]> ");
+        fflush(stdout);
 
         //returns -1 when it is the end of file (EOF), ctrl + D
-        if (getline(&input, &input_size, stdin) == -1)
-        {
-            perror("getline");
+        // if (getline(&input, &input_size, stdin) == -1)
+        // {
+        //     perror("getline");
+        //     break;
+        // }
+
+        ssize_t nread = getline(&input, &input_size, stdin);
+
+        if (nread == -1) { // Ctrl+D
+            printf("\n");
             break;
         }
+
+        // remove newline
+        input[strcspn(input, "\n")] = '\0';
 
         args = parse_input(input);         
         
         if (!args[0])
         {
+            free_tokens(args);
             return;            
+        }
+        if (my_strcmp(args[0], "exit") == 0) 
+        {
+            free_tokens(args);
+            break;      // leave shell loop
         }
         else if (my_strcmp(args[0], "setenv") == 0)
         {
