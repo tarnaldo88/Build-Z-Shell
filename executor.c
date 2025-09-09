@@ -79,7 +79,8 @@ char** split_paths(char * paths, int* count)
 {
     char** result = NULL;
     char* token;
-    char paths_copy[MAX_PATH];
+    size_t size_of_path = my_strlen(paths);
+    char paths_copy[size_of_path];
 
     my_strncopy(paths_copy, paths, sizeof(paths_copy));
     paths_copy[sizeof(paths_copy - 1)] = '\0';
