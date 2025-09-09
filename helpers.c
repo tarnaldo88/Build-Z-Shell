@@ -1,5 +1,6 @@
 #include "torres_shell.h"
 
+//finds length of string passed as arg
 size_t my_strlen(const char* str)
 {
     if(str == NULL) return -1;
@@ -64,6 +65,7 @@ int my_strncmp(const char* str1, const char* str2, size_t n)
     
 }
 
+//gets env
 char * my_getenv(const char* name, char** env)
 {
     if(name == NULL || env == NULL)
@@ -84,6 +86,7 @@ char * my_getenv(const char* name, char** env)
     return NULL;
 }
 
+//duplicates given string
 char* my_strdup(const char* str)
 {
     if (str == NULL) return NULL;
@@ -99,6 +102,7 @@ char* my_strdup(const char* str)
     return duplicated;
 }
 
+//copies string
 char* my_strcopy(char * dest, const char * src)
 {
     if (src == NULL) return NULL;
@@ -112,6 +116,7 @@ char* my_strcopy(char * dest, const char * src)
     return ret;   
 }
 
+//tokenizes string passed
 char* my_strtok(char* str, const char* delimiter)
 {
     static char* next_token = NULL;
@@ -158,6 +163,7 @@ char* my_strtok(char* str, const char* delimiter)
     return token;    
 }
 
+//locates first occurence of a char in string
 char * my_strch(const char* str, char c)
 {
     while (*str)        
@@ -171,6 +177,7 @@ char * my_strch(const char* str, char c)
     return NULL;
 }
 
+//str copy into dest from src up to a certain index n
 char *my_strncopy(char *dest, const char *src, size_t n)
 {
     size_t i;

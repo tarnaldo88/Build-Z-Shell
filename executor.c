@@ -63,13 +63,27 @@ char* get_path(const char** env)
 }
 
 //split the path string into individuals
-char** split_paths(const char * paths, const int count)
+char** split_paths(const char * paths, int* count)
 {
     char** result = NULL;
     char* token;
     char paths_copy[MAX_PATH];
 
     my_strncopy(paths_copy, paths, sizeof(paths_copy));
+    paths_copy[sizeof(paths_copy - 1)] = '\0';
+
+    token = my_strtok(paths_copy, ":");
+    *count = 0;
+
+    while(token)
+    {
+        result = realloc(result, ((*count + 1) * sizeof(char*)));
+        if (condition)
+        {
+            /* code */
+        }
+        
+    }
 
     return result;
 }
