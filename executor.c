@@ -123,7 +123,7 @@ char** split_paths(char * paths, int* count)
     char** result = NULL;
     char* token;
     size_t size_of_path = my_strlen(paths);
-    char paths_copy[size_of_path];
+    char paths_copy[size_of_path + 1];
 
     my_strncopy(paths_copy, paths, sizeof(paths_copy));
     paths_copy[sizeof(paths_copy) - 1] = '\0';
@@ -151,6 +151,10 @@ char** split_paths(char * paths, int* count)
         (*count)++;
         token= my_strtok(NULL, ":");
     }
+
+    // Null-terminate array
+    result = realloc(result, ((*count + 1) * sizeof(char*)));
+    result[*count] = NULL;
 
     return result;
 }
