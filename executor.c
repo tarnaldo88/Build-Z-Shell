@@ -68,6 +68,8 @@ int child_process(char** args, char** env)
         if (access(full_path, X_OK) == 0)
         {
             execve(full_path, args, env);
+            perror("execve"); // only reached if execve fails
+            exit(EXIT_FAILURE);
         }        
     }
 
@@ -82,20 +84,23 @@ int child_process(char** args, char** env)
     //Attempt to execute command in the current working directory
     char *cwd = NULL;
     cwd = getcwd(NULL, 0);
-    if (cwd == NULL)
+    if (cwd != NULL)
+    {
+        char full_cwd_path[MAX_INPUT];
+        snprintf(full_cwd_path, sizeof(full_cwd_path), "%s/%s", cwd, args[0]);
+        free(cwd);
+
+        execve(full_cwd_path, args, env);
+        perror("execve"); // only reached if execve fails
+        exit(EXIT_FAILURE);
+    }
+    else
     {
         perror("getcwd");
-        return EXIT_FAILURE;
     }
 
-    char full_cwd_path[MAX_INPUT];
-    snprintf(full_cwd_path, sizeof(full_cwd_path), "%s/%s", cwd, args[0]);
-    free(cwd);
-
-    execve(full_cwd_path, args, env);
-    perror("execve");
-
-    return EXIT_SUCCESS;
+    fprintf(stderr, "command not found: %s\n", args[0]);
+    return EXIT_FAILURE;
 }
 
 //Fetches PATH variable
