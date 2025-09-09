@@ -16,6 +16,11 @@
    - `exit` / `quit`
  - "Unknown Command" message for non-recognized commands.
 
+ ## New Features
+ - External command execution: run many common Unix commands found on your system `PATH`.
+ - Improved error messages for invalid commands or missing executables.
+ - Quality-of-life improvements to built-ins like `echo`, `pwd`, and `cd`.
+
  ## How It Works
  1. `main()` calls `shell_loop(env)`.
  2. `shell_loop()` shows the prompt and reads a line using `getline()`.
@@ -37,11 +42,42 @@
  - `which echo`
  - `exit` or `quit`
 
- ## Roadmap
- - Execute external commands by searching `PATH` and using fork/exec.
- - Implement `setenv` and `unsetenv` for environment management.
- - PATH handling and prompt/usability improvements.
- - Enhanced `cd`: `cd -`, `cd ~`, `cd ..`, `cd` (home), and better error messages.
+ ## Torres Shell Commands
+ Below is a non-exhaustive list of commands you can run in Torres Shell. Availability depends on what is installed on your system.
 
- ## More Details
- See full status and roadmap: [README/PROJECT_STATUS.md](README/PROJECT_STATUS.md)
+ 1. Basic file and directory commands
+ - `ls` → list files in the current directory.
+ - `pwd` → print working directory (built-in available too).
+ - `cd <dir>` → change directory (built-in available too).
+ - `mkdir test` → create a directory.
+ - `rmdir test` → remove a directory.
+ - `touch file.txt` → create an empty file.
+ - `rm file.txt` → remove a file.
+
+ 2. Viewing and editing files
+ - `cat file.txt` → print file contents.
+ - `less file.txt` or `more file.txt` → view file contents page by page.
+ - `head file.txt` → first 10 lines.
+ - `tail file.txt` → last 10 lines.
+
+ 3. System commands
+ - `whoami` → print the current user.
+ - `date` → print current date/time.
+ - `uptime` → system uptime.
+ - `env` → print environment variables (built-in version available too).
+ - `echo "hello world"` → print text (built-in available too).
+
+ 4. Network commands
+ - `ping -c 1 google.com` → send one ping packet.
+ - `curl http://example.com` → fetch a web page (if installed).
+ - `wget http://example.com` → download a file.
+
+ 5. Other utilities
+ - `grep pattern file.txt` → search in files.
+ - `sort file.txt` → sort file contents.
+ - `wc file.txt` → count lines, words, and characters.
+ - `uname -a` → system information.
+
+ 6. Testing invalid or non-existent commands
+ - `foobar` → should print command not found in your shell.
+ - `./nonexistent` → tests running a relative path that doesn’t exist.
