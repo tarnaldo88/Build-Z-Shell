@@ -1,7 +1,7 @@
 #include "torres_shell.h"
 
 //Executes a command by forking and running it in a child process
-int executor(const char** args, const char** env)
+int executor(char** args, char** env)
 {
     __pid_t pid;
     int status;
@@ -39,7 +39,7 @@ int executor(const char** args, const char** env)
 }
 
 //Attempts to execute command by searching paths and the current directory
-int child_process(const char** args, const char** env)
+int child_process(char** args, char** env)
 {
     char* path_string = get_path(env);
     int num_paths;
@@ -54,7 +54,7 @@ int child_process(const char** args, const char** env)
 }
 
 //Fetches PATH variable
-char* get_path(const char** env)
+char* get_path(char** env)
 {
     for (size_t i = 0; env[i]; i++)
     {
@@ -68,7 +68,7 @@ char* get_path(const char** env)
 }
 
 //split the path string into individuals
-char** split_paths(const char * paths, int* count)
+char** split_paths(char * paths, int* count)
 {
     char** result = NULL;
     char* token;
