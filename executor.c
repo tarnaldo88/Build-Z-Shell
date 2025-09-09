@@ -36,7 +36,6 @@ int executor(char** args, char** env)
         {
             printf("Process terminated by signal: %d\n", WTERMSIG(status));
         }
-        
     }
     return EXIT_SUCCESS;
 }
@@ -57,17 +56,13 @@ int child_process(char** args, char** env)
     for (int i = 0; i < num_paths; i++)
     {
         char full_path[MAX_INPUT];
-        snprintf(full_path, sizeof(full_path), "%s/%s", paths_list[i], args[0]);
+        snprintf(full_path, sizeof(full_path), "%s/%s \n", paths_list[i], args[0]);
 
         if (access(full_path, X_OK) == 0)
         {
             execve(full_path, args, env);
         }        
     }
-
-    
-    
-
 
     for (int i = 0; paths_list[i]; i++)
     {
@@ -76,6 +71,20 @@ int child_process(char** args, char** env)
 
     free(path_string);
     free(paths_list);
+
+    //Attempt to execute command in the current working directory
+    char *cwd = NULL;
+    cwd = getcwd(NULL, 0);
+    if (cwd == NULL)
+    {
+        perror("getcwd");
+        return EXIT_FAILURE;
+    }
+
+    char full_cwd_path[MAX_INPUT];
+    snprintf(full_cwd_path, sizeof(full_cwd_path), "%s,%s", cwd, args[0]);
+    execve(full_cwd_path, args, env);
+    perror("execve");
 
     return EXIT_SUCCESS;
 }
