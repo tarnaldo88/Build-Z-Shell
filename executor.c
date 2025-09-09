@@ -54,6 +54,11 @@ int child_process(char** args, char** env)
     } 
     printf("\n");
 
+    for (int i = 0; paths_list[i]; i++)
+    {
+        free(paths_list[i]);
+    }    
+
     free(path_string);
     free(paths_list);
 
