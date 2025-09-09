@@ -6,7 +6,7 @@ char** split_paths(char * paths, int* count);
 //Executes a command by forking and running it in a child process
 int executor(char** args, char** env)
 {
-    __pid_t pid;
+    pid_t pid;
     int status;
     pid = fork();
 
@@ -48,11 +48,25 @@ int child_process(char** args, char** env)
     int num_paths;
     char** paths_list = split_paths(path_string, &num_paths);
 
-    for (size_t i = 0; paths_list[i]; i++)
+    // for (size_t i = 0; paths_list[i]; i++)
+    // {
+    //     printf("paths %s\n", paths_list[i]);
+    // } 
+    
+    //access() execve()
+    for (int i = 0; i < num_paths; i++)
     {
-        printf("paths %s ", paths_list[i]);
-    } 
-    printf("\n");
+        char full_path[MAX_INPUT];
+        snprintf(full_path, sizeof(full_path), "%s/%s", paths_list[i], args[0]);
+
+        if (access(full_path, X_OK) == 0)
+        {
+            execve(full_path, args, env);
+        }
+        
+    }
+    
+
 
     for (int i = 0; paths_list[i]; i++)
     {
@@ -88,7 +102,7 @@ char** split_paths(char * paths, int* count)
     char paths_copy[size_of_path];
 
     my_strncopy(paths_copy, paths, sizeof(paths_copy));
-    paths_copy[sizeof(paths_copy - 1)] = '\0';
+    paths_copy[sizeof(paths_copy) - 1] = '\0';
 
     token = my_strtok(paths_copy, ":");
     *count = 0;
@@ -101,6 +115,7 @@ char** split_paths(char * paths, int* count)
             perror("realloc");
             return NULL;
         }
+        
         result[*count] = my_strdup(token);
         
         if (!result[*count])
