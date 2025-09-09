@@ -12,6 +12,21 @@
 //manage path
 //Error handling
 
+//
+void display_help()
+{
+    printf("Basic Available commands (More Commands Found in README):\n");
+    printf("\tcd <directory>      - Change the current directory.\n");
+    printf("\tpwd                 - Print the current working directory.\n");
+    printf("\techo <text>         - Print the given text.\n");
+    printf("\tenv                 - Display all environment variables.\n");
+    printf("\tsetenv VAR=value    - Set an environment variable.\n");
+    printf("\tunsetenv <variable> - Remove an environment variable.\n");
+    printf("\twhich <command>     - Locate an executable in the system's PATH.\n");
+    printf("\t.help               - Display this help message.\n");
+    printf("\texit or quit        - Exit the shell.\n");
+}
+
 // Built-in: cd, pwd, echo, env, setenv, unsetenv, which, exit
 int shell_builts(char **args, char** env, char* initial_directory)
 {
@@ -35,11 +50,11 @@ int shell_builts(char **args, char** env, char* initial_directory)
     {
         return command_which(args, env);
     }
-    // else if(my_strcmp(args[0], "exit") == 0 || my_strcmp(args[0], "quit") == 0)
-    // {
-    //     printf("Goodbye!\n");
-    //     exit(EXIT_SUCCESS);
-    // }
+    else if(my_strcmp(args[0], "help") == 0)
+    {
+        display_help();
+        return 0;
+    }
     else
     {
         // printf("Unknown Command: %s\n", args[0]);
