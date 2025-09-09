@@ -1,5 +1,8 @@
 #include "torres_shell.h"
 
+char* get_path(char** env);
+char** split_paths(char * paths, int* count);
+
 //Executes a command by forking and running it in a child process
 int executor(char** args, char** env)
 {
