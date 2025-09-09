@@ -19,13 +19,10 @@ int executor(char** args, char** env)
     if (pid == 0)
     {
         //In child
-        exit(child_process(args, env));
+        child_process(args, env);
 
-        // if(child_process(args,env) != 0)
-        // {
-        //     perror("execve");
-        //     return EXIT_FAILURE;
-        // }
+        //execve failed in child_process.
+        return EXIT_FAILURE;
     }
     else
     {
@@ -34,19 +31,19 @@ int executor(char** args, char** env)
             perror("waitpid");
             return EXIT_FAILURE;
         }
-        if(WIFEXITED(status))
+        if (WIFEXITED(status))
         {
             return WEXITSTATUS(status);
+        }
+        else if (WIFSIGNALED(status))
+        {
+            fprintf(stderr, "Process killed by signal %d\n", WTERMSIG(status));
+            return EXIT_FAILURE;
         }
         else
         {
             return EXIT_FAILURE;
         }
-        
-        // if (WIFSIGNALED(status))
-        // {
-        //     printf("Process terminated by signal: %d\n", WTERMSIG(status));
-        // }
     }
 }
 
