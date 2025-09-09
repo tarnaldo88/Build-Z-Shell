@@ -1,5 +1,5 @@
 TARGET = torres_shell
-OBJ = main.c input_parser.c helpers.c CommandParser.c
+OBJ = main.c input_parser.c helpers.c CommandParser.c executor.c
 CC = gcc
 
 all: 

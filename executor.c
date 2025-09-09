@@ -45,6 +45,11 @@ int child_process(const char** args, const char** env)
     int num_paths;
     char** paths_list = split_paths(path_string, &num_paths);
 
+    for (size_t i = 0; paths_list[i]; i++)
+    {
+        printf("paths %s ", paths_list[i]);
+    } 
+
     return EXIT_FAILURE;
 }
 
@@ -81,18 +86,18 @@ char** split_paths(const char * paths, int* count)
         if (!result)
         {
             perror("realloc");
-            return EXIT_FAILURE;
+            return NULL;
         }
         result[*count] = my_strdup(token);
         
         if (!result[*count])
         {
             perror("my_strdup");
-            return EXIT_FAILURE;
+            return NULL;
         }
         
         (*count)++;
-        token= my_strtok(NULL, ':');
+        token= my_strtok(NULL, ":");
     }
 
     return result;
