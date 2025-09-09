@@ -82,8 +82,8 @@ int child_process(char** args, char** env)
     free(paths_list);
 
     //Attempt to execute command in the current working directory
-    char *cwd = NULL;
-    cwd = getcwd(NULL, 0);
+    char *cwd = getcwd(NULL, 0);
+    
     if (cwd != NULL)
     {
         char full_cwd_path[MAX_INPUT];
