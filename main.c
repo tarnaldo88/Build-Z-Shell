@@ -86,7 +86,7 @@ void shell_loop(char** env)
             free_tokens(args);
             return;            
         }
-        if (my_strcmp(args[0], "exit") == 0) 
+        if (my_strcmp(args[0], "exit") == 0 || my_strcmp(args[0], "quit") == 0) 
         {
             free_tokens(args);
             break;      // leave shell loop
