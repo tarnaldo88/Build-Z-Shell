@@ -78,11 +78,21 @@ char** split_paths(const char * paths, int* count)
     while(token)
     {
         result = realloc(result, ((*count + 1) * sizeof(char*)));
-        if (condition)
+        if (!result)
         {
-            /* code */
+            perror("realloc");
+            return EXIT_FAILURE;
+        }
+        result[*count] = my_strdup(token);
+        
+        if (!result[*count])
+        {
+            perror("my_strdup");
+            return EXIT_FAILURE;
         }
         
+        (*count)++;
+        token= my_strtok(NULL, ':');
     }
 
     return result;
