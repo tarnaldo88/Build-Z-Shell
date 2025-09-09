@@ -12,7 +12,7 @@ int command_cd(char** args, char* initial_directory)
     } 
     else if(chdir(args[1]) == 0)
     {
-        printf("cd worked, placeholder\n");
+        printf("worked\n");
     } 
     else
     {

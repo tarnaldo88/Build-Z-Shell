@@ -53,6 +53,10 @@ int child_process(char** args, char** env)
         printf("paths %s ", paths_list[i]);
     } 
     printf("\n");
+
+    free(path_string);
+    free(paths_list);
+
     return EXIT_SUCCESS;
 }
 
