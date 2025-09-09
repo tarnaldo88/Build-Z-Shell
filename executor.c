@@ -18,7 +18,7 @@ int executor(char** args, char** env)
 
     if (pid == 0)
     {
-        if(child_process(args,env))
+        if(child_process(args,env) != 0)
         {
             perror("execve");
             return EXIT_FAILURE;
@@ -52,8 +52,8 @@ int child_process(char** args, char** env)
     {
         printf("paths %s ", paths_list[i]);
     } 
-
-    return EXIT_FAILURE;
+    printf("\n");
+    return EXIT_SUCCESS;
 }
 
 //Fetches PATH variable
