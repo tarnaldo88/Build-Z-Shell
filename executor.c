@@ -18,11 +18,14 @@ int executor(char** args, char** env)
 
     if (pid == 0)
     {
-        if(child_process(args,env) != 0)
-        {
-            perror("execve");
-            return EXIT_FAILURE;
-        }
+        //In child
+        exit(child_process(args, env));
+
+        // if(child_process(args,env) != 0)
+        // {
+        //     perror("execve");
+        //     return EXIT_FAILURE;
+        // }
     }
     else
     {
@@ -31,13 +34,20 @@ int executor(char** args, char** env)
             perror("waitpid");
             return EXIT_FAILURE;
         }
-        
-        if (WIFSIGNALED(status))
+        if(WIFEXITED(status))
         {
-            printf("Process terminated by signal: %d\n", WTERMSIG(status));
+            return WEXITSTATUS(status);
         }
+        else
+        {
+            return EXIT_FAILURE;
+        }
+        
+        // if (WIFSIGNALED(status))
+        // {
+        //     printf("Process terminated by signal: %d\n", WTERMSIG(status));
+        // }
     }
-    return EXIT_SUCCESS;
 }
 
 //Attempts to execute command by searching paths and the current directory
@@ -56,7 +66,7 @@ int child_process(char** args, char** env)
     for (int i = 0; i < num_paths; i++)
     {
         char full_path[MAX_INPUT];
-        snprintf(full_path, sizeof(full_path), "%s/%s \n", paths_list[i], args[0]);
+        snprintf(full_path, sizeof(full_path), "%s/%s", paths_list[i], args[0]);
 
         if (access(full_path, X_OK) == 0)
         {
@@ -82,7 +92,9 @@ int child_process(char** args, char** env)
     }
 
     char full_cwd_path[MAX_INPUT];
-    snprintf(full_cwd_path, sizeof(full_cwd_path), "%s,%s", cwd, args[0]);
+    snprintf(full_cwd_path, sizeof(full_cwd_path), "%s/%s", cwd, args[0]);
+    free(cwd);
+
     execve(full_cwd_path, args, env);
     perror("execve");
 
