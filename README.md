@@ -1,4 +1,4 @@
-# Build-Z-Shell
+# Custom-Shell
  Custom Unix-like shell in C.
 
  ## Overview
